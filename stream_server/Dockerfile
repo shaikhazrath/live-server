@@ -1,14 +1,17 @@
-FROM ubuntu:focal
+FROM node:18-alpine
 
-RUN /usr/bin/apt-get update && \
-    /usr/bin/apt-get install -y curl && \
-    curl -sL https://deb.nodesource.com/setup_18.x | bash - && \
-    /usr/bin/apt-get update && \
-    /usr/bin/apt-get upgrade -y && \
-    /usr/bin/apt-get install -y nodejs ffmpeg
+WORKDIR /app
 
-WORKDIR /home/app
+COPY package*.json ./
 
-RUN npm i -g nodemon
+RUN npm install
 
-CMD npm run dev 
+RUN apk add --no-cache ffmpeg
+
+RUN cp /usr/bin/ffmpeg ./
+
+COPY . .
+
+EXPOSE 9000
+
+CMD ["npm", "run", "dev"]

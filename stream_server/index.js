@@ -3,10 +3,16 @@ import path from 'path';
 import { spawn } from 'child_process';
 import express from 'express';
 import { Server as SocketIO } from 'socket.io';
-
+import cors from 'cors'
 const app = express();
 const server = http.createServer(app);
-const io = new SocketIO(server);
+const io = new SocketIO(server,{
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+      }
+});
+  
 
 const options = [
     '-i',
@@ -71,4 +77,4 @@ io.on('connection', (socket) => {
     });
 });
 
-server.listen(3000, () => console.log(`HTTP Server is running on PORT 3000`));
+server.listen(9000, () => console.log(`HTTP Server is running on PORT 9000`));

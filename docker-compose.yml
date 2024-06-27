@@ -3,7 +3,7 @@ services:
   media-server:
     container_name: media-server
     build:
-      context: .
+      context: ./rtmpserver
       dockerfile: Dockerfile
     ports:
       - 8000:8000
@@ -16,10 +16,8 @@ services:
     build:
       context: ./stream_server
       dockerfile: Dockerfile
-    volumes:
-      - ./stream_server:/home/app
     ports:
-      - 3000:3000
+      - 9000:9000
     networks:
       - media-network
     depends_on:

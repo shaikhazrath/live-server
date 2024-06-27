@@ -5,8 +5,10 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --legacy-watch server.js"  },
+    "dev": "nodemon --legacy-watch server.js"
+  },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.19.1",
     "socket.io": "^4.7.5"
   },
