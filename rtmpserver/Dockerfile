@@ -17,4 +17,4 @@ EXPOSE 8000
 EXPOSE 1935
 
 # Running the app
-CMD ["node", "server.js"]
+CMD ["npm", "run", "dev"]

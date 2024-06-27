@@ -7,6 +7,7 @@ export default function Home() {
   const videoRef = useRef(null);
   const [socket, setSocket] = useState(null);
   const [media, setMedia] = useState(null);
+  const [key,setkey] = useState(null)
 
   useEffect(() => {
     const newSocket = io('http://localhost:9000');
@@ -36,7 +37,7 @@ export default function Home() {
 
     mediaRecorder.ondataavailable = ev => {
       console.log('Binary Stream Available', ev.data);
-      socket.emit('binarystream', ev.data);
+      socket.emit('binarystream', ev.data,key);
     };
 
     mediaRecorder.start(25);
@@ -44,7 +45,9 @@ export default function Home() {
 
   return (
     <div>
+      
       <video ref={videoRef} autoPlay playsInline id="user-video"></video>
+      <input type="text"  value={key} onChange={(e)=>setkey(e.target.value)}  />
       <button onClick={startStreaming} id="start-btn">Start Streaming</button>
     </div>
   );

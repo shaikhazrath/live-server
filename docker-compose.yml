@@ -10,8 +10,11 @@ services:
       - 1935:1935
     networks:
       - media-network
+    volumes:
+      - ./rtmpserver:/app
+      - /app/node_modules
 
-  app:
+  stream_server:
     container_name: stream_server
     build:
       context: ./stream_server
@@ -22,7 +25,14 @@ services:
       - media-network
     depends_on:
       - media-server
+    volumes:
+      - ./stream_server:/app
+      - /app/node_modules
 
 networks:
   media-network:
     driver: bridge
+
+volumes:
+  media-server:
+  stream_server:

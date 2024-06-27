@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --legacy-watch server.js"
+    "dev": "nodemon --legacy-watch index.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
