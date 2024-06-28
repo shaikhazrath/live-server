@@ -8,7 +8,6 @@ RUN npm install
 
 RUN apk add --no-cache ffmpeg
 
-
 RUN cp /usr/bin/ffmpeg ./
 
 COPY . .

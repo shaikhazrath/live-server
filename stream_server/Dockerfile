@@ -8,10 +8,10 @@ RUN npm install
 
 RUN apk add --no-cache ffmpeg
 
-RUN cp /usr/bin/ffmpeg ./
 
 COPY . .
 
 EXPOSE 9000
 
+# Running the app
 CMD ["npm", "run", "dev"]

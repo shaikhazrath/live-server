@@ -15,7 +15,7 @@ const rtmpConfig = {
 };
 
 const transformationConfig = {
-  ffmpeg: "./ffmpeg",
+  ffmpeg: "/usr/bin/ffmpeg",
   tasks: [
     {
       app: "live",

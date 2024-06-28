@@ -18,16 +18,17 @@ app.use(cors());
 
 let ffmpegProcess = null;
 
-app.use(express.static(path.resolve('./public')));
 
 io.on('connection', (socket) => {
   console.log('Socket Connected', socket.id);
 
   socket.on('binarystream', (stream, key) => {
+    console.log('Binary Stream Incoming...', stream);
 
     if (!ffmpegProcess) {
       let options = [
-        '-i', '-',
+        '-i',
+        '-',
         '-c:v', 'libx264',
         '-preset', 'ultrafast',
         '-tune', 'zerolatency',
@@ -43,21 +44,21 @@ io.on('connection', (socket) => {
         '-b:a', '128k',
         '-ar', '32000',
         '-f', 'flv',
-        `rtmp://media-server/live/${key}`,
+        `rtmp://rtmpserver/live/${key}`,
       ];
 
-      ffmpegProcess = spawn('ffmpeg', options);
+      ffmpegProcess = spawn('/usr/bin/ffmpeg', options);
 
       ffmpegProcess.stdout.on('data', (data) => {
-        // console.log(`ffmpeg stdout: ${data}`);
+        console.log(`ffmpeg stdout: ${data}`);
       });
 
       ffmpegProcess.stderr.on('data', (data) => {
-        // console.error(`ffmpeg stderr: ${data}`);
+        console.error(`ffmpeg stderr: ${data}`);
       });
 
       ffmpegProcess.on('close', (code) => {
-        // console.log(`ffmpeg process exited with code ${code}`);
+        console.log(`ffmpeg process exited with code ${code}`);
         ffmpegProcess = null;
       });
 
@@ -67,9 +68,8 @@ io.on('connection', (socket) => {
     }
 
     if (ffmpegProcess) {
-      const buffer = Buffer.from(stream);
-      ffmpegProcess.stdin.write(buffer, (err) => {
-        if (err) {
+      ffmpegProcess.stdin.write(stream, (err) => {
+                if (err) {
           console.error('Error writing to ffmpeg stdin:', err);
           if (err.code === 'EPIPE') {
             console.error('EPIPE error - the ffmpeg process might have exited.');

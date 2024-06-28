@@ -4,7 +4,7 @@ import VideoPlayer from '@/components/VideoPlayer';
 
 
 function App() {
-  var videoSrc = 'http://localhost:8000/live/hazrathali/index.m3u8';
+  var videoSrc = 'http://localhost:8000/live/ali/index.m3u8';
 
   const playerRef = useRef(null);
 
