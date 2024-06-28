@@ -30,17 +30,17 @@ The app is designed to provide a reliable way to stream audio, video, and data o
    git clone https://github.com/your-username/live-streaming-app.git
    cd live-streaming-app
    ```
-
-2. **Install Dependencies:**
-
-   ```sh
-   npm install
-   ```
-
-3. **Build Docker Containers:**
+2. **Build Docker Containers:**
 
    ```sh
    docker-compose up --build
+   ```
+3. **Running Nextjs frontend:**
+
+   ```sh
+   cd frontend
+   npm install
+   npm run dev
    ```
 
 ### Configuration
