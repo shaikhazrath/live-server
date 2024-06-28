@@ -6,7 +6,11 @@ COPY package*.json ./
 
 RUN npm install
 
+
+
 RUN apk add --no-cache ffmpeg
+
+RUN npm install -g nodemon
 
 
 COPY . .

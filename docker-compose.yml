@@ -28,6 +28,19 @@ services:
     volumes:
       - ./stream_server:/app
       - /app/node_modules
+    
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 9001:9001
+    networks:
+      - media-network
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
 
 networks:
   media-network:
